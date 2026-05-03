@@ -1,0 +1,4 @@
+Dataset,Model_Type,Algorithm,Accuracy,Precision,Recall,F1_Score,Train_Time_sec,RAM_Usage_MB,CPU_Usage_percent
+DrDoS_NTP,Baseline,Random Forest,0.9995,0.9894,0.9894,0.9894,5.48,-0.59,0.0
+DrDoS_NTP,Baseline,XGBoost,0.9994,0.9893,0.9859,0.9876,0.5,2.56,28.0
+DrDoS_NTP,TPOT_Optimized,XGBClassifier,0.9995,0.9927,0.9859,0.9893,147.3,-6.92,60.5

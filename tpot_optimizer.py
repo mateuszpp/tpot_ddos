@@ -1,80 +1,93 @@
-# --- MAGIA DLA PYTHONA 3.12 ---
 import sys
 import importlib
-sys.modules['imp'] = importlib  # Oszukujemy TPOT-a, żeby nie szukał usuniętego modułu 'imp'
-# ------------------------------
+sys.modules['imp'] = importlib 
 
 import time
+import psutil
+import os
 from tpot import TPOTClassifier
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score
 
+def get_system_metrics():
+    process = psutil.Process(os.getpid())
+    ram = process.memory_info().rss / (1024 ** 2)
+    cpu = psutil.cpu_percent(interval=0.5)
+    return ram, cpu
+
 def train_baseline_models(X_train, y_train, X_test, y_test):
-    """
-    Trenuje surowe, nie zoptymalizowane modele jako punkt odniesienia (Baseline).
-    Zrezygnowano z SVM ze względu na wysoki koszt obliczeniowy na zbiorze DDoS.
-    """
     print("\n--- Trenowanie modeli bazowych (Baseline) ---")
     models = {
         'Random Forest': RandomForestClassifier(random_state=42),
         'XGBoost': XGBClassifier(eval_metric='logloss', random_state=42)
     }
     
-    baseline_results = {}
+    results = []
     for name, model in models.items():
+        ram_start, _ = get_system_metrics()
         start_time = time.time()
+        
         model.fit(X_train, y_train)
+        
         train_time = time.time() - start_time
+        ram_end, cpu_usage = get_system_metrics()
         
         preds = model.predict(X_test)
         acc = accuracy_score(y_test, preds)
-        print(f"{name} Baseline - Accuracy: {acc:.4f}, Czas treningu: {train_time:.2f}s")
-        baseline_results[name] = {'model': model, 'accuracy': acc, 'time': train_time}
+        print(f"{name} Baseline - Accuracy: {acc:.4f}, Czas: {train_time:.2f}s")
         
-    return baseline_results
+        results.append({
+            'Model_Type': 'Baseline',
+            'Algorithm': name,
+            'Accuracy': acc,
+            'Train_Time_sec': train_time,
+            'RAM_Usage_MB': ram_end - ram_start,
+            'CPU_Usage_percent': cpu_usage,
+            'Model_Object': model
+        })
+        
+    return results
 
-def run_tpot_optimization(X_train, y_train, X_test, y_test, generations=3, population_size=10):
+def run_tpot_optimization(X_train, y_train, X_test, y_test, generations=3, population_size=5):
     print("\n--- Rozpoczęcie optymalizacji genetycznej TPOT ---")
     
-    # Czyste, profesjonalne podejście: nasza własna konfiguracja bez SVM
     custom_tpot_config = {
-        'sklearn.ensemble.RandomForestClassifier': {
-            'n_estimators': [100, 200],
-            'criterion': ["gini", "entropy"],
-            'max_depth': [None, 10, 20]
-        },
-        'xgboost.XGBClassifier': {
-            'n_estimators': [100, 200],
-            'learning_rate': [0.01, 0.1, 0.5],
-            'max_depth': [3, 5, 7]
-        }
+        'sklearn.ensemble.RandomForestClassifier': {'n_estimators': [50, 100], 'max_depth': [None, 10]},
+        'xgboost.XGBClassifier': {'n_estimators': [50, 100], 'learning_rate': [0.1, 0.5], 'max_depth': [3, 5]}
     }
 
-    # TPOT 0.12.1 przyjmie to bez mrugnięcia okiem
     tpot = TPOTClassifier(
         generations=generations,
         population_size=population_size,
-        cv=5, 
-        config_dict=custom_tpot_config, # Używamy legalnego słownika ograniczającego modele!
+        cv=3, 
+        config_dict=custom_tpot_config, 
         max_eval_time_mins=2, 
-        verbosity=2, # Pasek postępu powraca!
+        verbosity=2, 
         random_state=42
     )
     
+    ram_start, _ = get_system_metrics()
     start_time = time.time()
+    
     tpot.fit(X_train, y_train)
+    
     end_time = time.time()
+    ram_end, cpu_usage = get_system_metrics()
+    train_time = end_time - start_time
     
-    print("\n--- Zakończono proces optymalizacji TPOT ---")
-    print(f"Całkowity czas procesu genetycznego: {(end_time - start_time):.2f} sekund")
-    
-    # Bezpieczne wyciągnięcie gotowego modelu ze Scikit-Learn
     best_model = tpot.fitted_pipeline_
-    score = best_model.score(X_test, y_test)
-    print(f"Test Accuracy zoptymalizowanego potoku: {score:.4f}")
+    acc = best_model.score(X_test, y_test)
+    print(f"TPOT Accuracy: {acc:.4f}, Czas: {train_time:.2f}s")
     
-    tpot.export('tpot_best_pipeline.py')
-    print("Wyeksportowano strukturę najlepszego potoku do pliku 'tpot_best_pipeline.py'.")
+    result = {
+        'Model_Type': 'TPOT_Optimized',
+        'Algorithm': str(best_model.steps[-1][1]).split('(')[0], # Pobiera nazwę modelu (np. XGBClassifier)
+        'Accuracy': acc,
+        'Train_Time_sec': train_time,
+        'RAM_Usage_MB': ram_end - ram_start,
+        'CPU_Usage_percent': cpu_usage,
+        'Model_Object': best_model
+    }
     
-    return best_model
+    return result
