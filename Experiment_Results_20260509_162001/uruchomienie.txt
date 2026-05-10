@@ -1,0 +1,172 @@
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\tpot\builtins\__init__.py:36: UserWarning: Warning: optional dependency `torch` is not available. - skipping import of NN models.
+  warnings.warn("Warning: optional dependency `torch` is not available. - skipping import of NN models.")
+Wyniki będą zapisywane w katalogu: Experiment_Results_20260509_162001
+
+[INFO] Plik DrDoS_NTP ma rozmiar 0.60 GB (< 1GB). Ustawiono próbkowanie: 10.0%
+Ładowanie danych z: ../DrDoS_NTP.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_NTP
+==================================================
+Dane w tym przebiegu: Trening=96796, Test=24200
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 0.9999, Czas: 14.53s
+XGBoost Baseline - Accuracy: 1.0000, Czas: 0.95s
+
+--- Ewaluacja modelu: DrDoS_NTP_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: DrDoS_NTP_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+Optimization Progress:   3%|███▋                                                                                                          | 2/60 [00:Optimization ProgressOptimization Progress:   7%|███████▎                                                                                                      | 4/60 [01:42<30:18, 32.48s/pipeOptimization Progress:   8%|█████████▏                                                                                                    | 5/60 [01:55<23:03, 25.16s/pipeOptimization Progress:  10%|███████████                                                                                                   | 6/60 [02:09<19:16, 21.41s/pipeOptimization Progress:  12%|████████████▊                                                                                                 | 7/60 [02:16<14:54, 16.88s/pipeOptimization Progress:  13%|██████████████▋                                                                                               | 8/60 [02:19<10:39, 12.30s/pipeOptimization Progress:  15%|████████████████▌                                                                                             | 9/60 [02:28<09:36, 11.31s/pipeOptimization Progress:  17%|██████████████████▏                                                                                          | 10/60 [05:13<48:52, 58.66s/pipeOptimization Progress:  18%|███████████████████▉                                                                                         | 11/60 [05:50<42:36, 52.18s/pipeOptimization Progress:  20%|█████████████████████▊                                                                                       | 12/60 [06:33<39:29, 49.36s/pipeOptimization Progress:  22%|███████████████████████▌                                                                                     | 13/60 [06:35<27:32, 35.16s/pipeOptimization Progress:  23%|█████████████████████████▍                                                                                   | 14/60 [08:18<42:40, 55.66s/pipeOptimization Progress:  25%|██████████████████████████▊                                                                                | 15/60 [11:26<1:11:29, 95.31s/pipeOptimization Progress:  28%|██████████████████████████████▉                                                                              | 17/60 [12:49<50:31, 70.50s/pipeOptimization Progress:  30%|████████████████████████████████▋                                                                            | 18/60 [12:50<37:11, 53.13s/pipeOptimization Progress:  32%|██████████████████████████████████▌                                                                          | 19/60 [12:57<28:03, 41.06s/pipeOptimization Progress:  33%|████████████████████████████████████▎                                                                        | 20/60 [13:20<24:09, 36.24s/pipeOptimization Progress:  35%|██████████████████████████████████████▏                                                                      | 21/60 [14:18<27:33, 42.40s/pipe                                                                                                                                                                               
+Generation 1 - Current best internal CV score: 0.9999173511028463
+Optimization Progress:  35%|██████████████████████████████████████▏                                                                      | 21/60 [14:18<27:33, 42.40s/pipeOptimization Progress:  37%|███████████████████████████████████████▉                                                                     | 22/60 [14:36<22:27, 35.45s/pipeOptimization Progress:  38%|█████████████████████████████████████████▊                                                                   | 23/60 [14:44<16:54, 27.41s/pipeOptimization Progress:  40%|███████████████████████████████████████████▌                                                                 | 24/60 [15:09<15:58, 26.61s/pipeOptimization Progress:  42%|█████████████████████████████████████████████▍                                                               | 25/60 [15:23<13:23, 22.96s/pipeOptimization Progress:  43%|███████████████████████████████████████████████▏                                                             | 26/60 [16:18<18:22, 32.43s/pipeOptimization Progress:  45%|█████████████████████████████████████████████████                                                            | 27/60 [17:45<26:51, 48.83s/pipeOptimization Progress:  47%|██████████████████████████████████████████████████▊                                                          | 28/60 [19:05<30:56, 58.01s/pipeOptimization Progress:  48%|████████████████████████████████████████████████████▋                                                        | 29/60 [19:12<22:06, 42.78s/pipeOptimization Progress:  50%|██████████████████████████████████████████████████████▌                                                      | 30/60 [22:12<41:57, 83.90s/pipeOptimization Progress:  53%|██████████████████████████████████████████████████████████▏                                                  | 32/60 [25:12<40:28, 86.74s/pipe                                                                                                                                                                               
+Generation 2 - Current best internal CV score: 0.9999173511028463
+Optimization Progress:  55%|███████████████████████████████████████████████████████████▉                                                 | 33/60 [25:12<39:02, 86.74s/pipeOptimization Progress:  55%|███████████████████████████████████████████████████████████▉                                                 | 33/60 [25:13<29:28, 65.50s/pipeOptimization Progress:  57%|█████████████████████████████████████████████████████████████▊                                               | 34/60 [26:44<31:10, 71.95s/pipeOptimization Progress:  58%|███████████████████████████████████████████████████████████████▌                                             | 35/60 [28:00<30:29, 73.17s/pipeOptimization Progress:  60%|█████████████████████████████████████████████████████████████████▍                                           | 36/60 [28:01<21:10, 52.96s/pipeOptimization Progress:  62%|███████████████████████████████████████████████████████████████████▏                                         | 37/60 [28:09<15:21, 40.05s/pipeOptimization Progress:  63%|█████████████████████████████████████████████████████████████████████                                        | 38/60 [28:23<11:56, 32.55s/pipeOptimization Progress:  65%|██████████████████████████████████████████████████████████████████████▊                                      | 39/60 [28:59<11:45, 33.60s/pipeOptimization Progress:  67%|████████████████████████████████████████████████████████████████████████▋                                    | 40/60 [29:16<09:34, 28.70s/pipeOptimization Progress:  68%|██████████████████████████████████████████████████████████████████████████▍                                  | 41/60 [29:24<07:09, 22.62s/pipeOptimization Progress:  70%|████████████████████████████████████████████████████████████████████████████▎                                | 42/60 [29:39<06:05, 20.32s/pipeOptimization Progress:  72%|██████████████████████████████████████████████████████████████████████████████                               | 43/60 [29:52<05:06, 18.04s/pipe                                                                                                                                                                               
+Generation 3 - Current best internal CV score: 0.9999173511028463
+Optimization Progress:  72%|██████████████████████████████████████████████████████████████████████████████                               | 43/60 [29:52<05:06, 18.04s/pipeOptimization Progress:  73%|███████████████████████████████████████████████████████████████████████████████▉                             | 44/60 [29:54<03:31, 13.22s/pipeOptimization Progress:  75%|█████████████████████████████████████████████████████████████████████████████████▊                           | 45/60 [30:33<05:17, 21.17s/pipeOptimization Progress:  77%|███████████████████████████████████████████████████████████████████████████████████▌                         | 46/60 [31:00<05:17, 22.65s/pipeOptimization Progress:  78%|█████████████████████████████████████████████████████████████████████████████████████▍                       | 47/60 [31:08<03:57, 18.28s/pipeOptimization Progress:  80%|███████████████████████████████████████████████████████████████████████████████████████▏                     | 48/60 [34:13<13:41, 68.44s/pipeOptimization Progress:  83%|██████████████████████████████████████████████████████████████████████████████████████████▊                  | 50/60 [34:29<06:46, 40.61s/pipeOptimization Progress:  85%|████████████████████████████████████████████████████████████████████████████████████████████▋                | 51/60 [35:54<07:42, 51.43s/pipeOptimization Progress:  87%|██████████████████████████████████████████████████████████████████████████████████████████████▍              | 52/60 [36:03<05:23, 40.48s/pipeOptimization Progress:  88%|████████████████████████████████████████████████████████████████████████████████████████████████▎            | 53/60 [37:20<05:52, 50.40s/pipeOptimization Progress:  90%|██████████████████████████████████████████████████████████████████████████████████████████████████           | 54/60 [37:48<04:24, 44.07s/pipe                                                                                                                                                                               
+Generation 4 - Current best internal CV score: 0.9999173511028463
+Optimization Progress:  90%|██████████████████████████████████████████████████████████████████████████████████████████████████           | 54/60 [37:48<04:24, 44.07s/pipeOptimization Progress:  92%|███████████████████████████████████████████████████████████████████████████████████████████████████▉         | 55/60 [38:08<03:06, 37.25s/pipeOptimization Progress:  93%|█████████████████████████████████████████████████████████████████████████████████████████████████████▋       | 56/60 [41:11<05:17, 79.39s/pipeOptimization Progress:  97%|█████████████████████████████████████████████████████████████████████████████████████████████████████████▎   | 58/60 [41:19<01:30, 45.20s/pipeOptimization Progress:  98%|███████████████████████████████████████████████████████████████████████████████████████████████████████████▏ | 59/60 [41:34<00:37, 37.93s/pipeOptimization Progress: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 60/60 [41:42<00:00, 30.13s/pipeOptimization Progress: 61pipeline [42:02, 27.51s/pipeline]                                                                                                                                                                          
+Generation 5 - Current best internal CV score: 0.9999173511028463
+                                                          
+Best pipeline: ExtraTreesClassifier(LogisticRegression(input_matrix, C=0.1, dual=False, penalty=l2), bootstrap=True, criterion=entropy, max_features=0.8, min_samples_leaf=19, min_samples_split=5, n_estimators=100)
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+TPOT Accuracy: 0.9998, Czas: 2787.04s
+
+--- Ewaluacja modelu: DrDoS_NTP_TPOT_Optimized ---
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+[INFO] Plik DrDoS_LDAP ma rozmiar 0.85 GB (< 1GB). Ustawiono próbkowanie: 10.0%
+Ładowanie danych z: ../DrDoS_LDAP.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_LDAP
+==================================================
+Dane w tym przebiegu: Trening=171431, Test=42858
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 1.0000, Czas: 6.88s
+XGBoost Baseline - Accuracy: 0.9986, Czas: 1.32s
+
+--- Ewaluacja modelu: DrDoS_LDAP_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: DrDoS_LDAP_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                                                         
+Generation 1 - Current best internal CV score: 0.9998775016333027
+                                                                                                                                                                         
+Generation 2 - Current best internal CV score: 0.9999008347041407
+                                                                                                                                                                         
+Generation 3 - Current best internal CV score: 0.9999008347041407
+                                                                                                                                                                         
+Generation 4 - Current best internal CV score: 0.9999533338583237
+                                                                                                                                                                         
+Generation 5 - Current best internal CV score: 0.9999533338583237
+                                                          
+Best pipeline: ExtraTreesClassifier(input_matrix, bootstrap=False, criterion=entropy, max_features=0.35000000000000003, min_samples_leaf=1, min_samples_split=9, n_estimators=100)
+TPOT Accuracy: 1.0000, Czas: 3555.91s
+
+--- Ewaluacja modelu: DrDoS_LDAP_TPOT_Optimized ---
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+--- Tworzenie Globalnego Zbioru (Combined Dataset) ---
+Pobieranie próbek z ../DrDoS_NTP.csv...
+Pobieranie próbek z ../DrDoS_LDAP.csv...
+Ładowanie danych z: temp_global_dataset.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: Global_Combined_Dataset
+==================================================
+Dane w tym przebiegu: Trening=80408, Test=20102
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 1.0000, Czas: 9.21s
+XGBoost Baseline - Accuracy: 1.0000, Czas: 1.08s
+
+--- Ewaluacja modelu: Global_Combined_Dataset_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: Global_Combined_Dataset_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                                                         
+Generation 1 - Current best internal CV score: 0.9998631970730485
+                                                                                                                                                                         
+Generation 2 - Current best internal CV score: 0.9998631970730485
+                                                                                                                                                                         
+Generation 3 - Current best internal CV score: 0.9999626902795627
+                                                                                                                                                                         
+Generation 4 - Current best internal CV score: 0.9999626902795627
+                                                                                                                                                                         
+Generation 5 - Current best internal CV score: 0.9999626902795627
+                                                                                                                                                                         
+Best pipeline: ExtraTreesClassifier(input_matrix, bootstrap=False, criterion=entropy, max_features=0.35000000000000003, min_samples_leaf=2, min_samples_split=9, n_estimators=100)
+TPOT Accuracy: 1.0000, Czas: 1219.59s
+
+--- Ewaluacja modelu: Global_Combined_Dataset_TPOT_Optimized ---
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+WSZYSTKIE EKSPERYMENTY ZAKOŃCZONE POMYŚLNIE. Sprawdź katalog: Experiment_Results_20260509_162001

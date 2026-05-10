@@ -1,0 +1,3 @@
+Dataset,Train_Size,Test_Size,Model_Type,Algorithm,Accuracy,Precision,Recall,F1_Score,Train_Time_sec,RAM_Usage_MB,CPU_Usage_percent
+DrDoS_NTP,96796,24200,Baseline,Random Forest,0.9999,0.9982,0.9982,0.9982,17.37,0.05,10.3
+DrDoS_NTP,96796,24200,Baseline,XGBoost,1.0,1.0,0.9982,0.9991,1.19,2.23,25.2

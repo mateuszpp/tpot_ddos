@@ -49,20 +49,20 @@ def train_baseline_models(X_train, y_train, X_test, y_test):
         
     return results
 
-def run_tpot_optimization(X_train, y_train, X_test, y_test, generations=3, population_size=5):
+def run_tpot_optimization(X_train, y_train, X_test, y_test, generations=5, population_size=10):
     print("\n--- Rozpoczęcie optymalizacji genetycznej TPOT ---")
     
     custom_tpot_config = {
         'sklearn.ensemble.RandomForestClassifier': {'n_estimators': [50, 100], 'max_depth': [None, 10]},
         'xgboost.XGBClassifier': {'n_estimators': [50, 100], 'learning_rate': [0.1, 0.5], 'max_depth': [3, 5]}
-    }
-
+    } # ew można użyć "TPOT light" lub "TPOT sparse" dla szybszej optymalizacji przy TPOT light zmieniłem eval time max na minute, 
+# dla tpot light puszcze mniej klas 
     tpot = TPOTClassifier(
         generations=generations,
         population_size=population_size,
         cv=3, 
-        config_dict=custom_tpot_config, 
-        max_eval_time_mins=2, 
+        #config_dict="TPOT light", 
+        max_eval_time_mins=3, 
         verbosity=2, 
         random_state=42
     )

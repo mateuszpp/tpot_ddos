@@ -1,0 +1,232 @@
+
+FAZA 1: Przygotowanie modelu ML (Uczenie Offline)
+Zanim zaczniesz analizować ruch w czasie rzeczywistym, musisz mieć "mózg" swojego systemu.
+
+Pobranie danych: Wybierz nowoczesny zbiór danych zawierający ataki DDoS, np. CIC-DDoS2019 lub CSE-CIC-IDS2018.
+
+Wybór algorytmów: Wytrenuj co najmniej dwa modele do porównania (np. jeden szybki klasyczny: Random Forest / Decision Tree oraz jeden bardziej złożony: Multi-Layer Perceptron / głęboka sieć neuronowa).
+
+Ewaluacja bazowa: Zmierz ich dokładność (Accuracy), precyzję (Precision) i czułość (Recall) na suchych danych.
+
+Eksport: Zapisz wytrenowane modele do plików (np. za pomocą biblioteki joblib lub pickle w Pythonie), aby skrypt czasu rzeczywistego mógł je błyskawicznie załadować do pamięci RAM.
+
+FAZA 2: Architektura Systemu Czasu Rzeczywistego (Inżynieria)
+Tutaj budujesz aplikację typu Proof-of-Concept w Pythonie, rozwiązując problemy wydajności i stabilności, o których rozmawialiśmy.
+
+Wzorzec Producent-Konsument (Wieloprocesowość):
+
+Wątek/Proces 1 (Sniffer): Szybko przechwytuje pakiety z karty sieciowej (np. używając scapy z próbkowaniem co 10 pakiet) i wrzuca je do kolejki w pamięci.
+
+Wątek/Proces 2 (Ekstraktor Cech): Pobiera pakiety z kolejki, grupuje je w przepływy (flows) i wylicza statystyki (np. pakiety na sekundę, średni rozmiar).
+
+Wątek/Proces 3 (Predykcja ML): Odbiera wektory cech, przepuszcza przez załadowany model ML i wydaje werdykt.
+
+Implementacja Okna Przesuwnego (Sliding Window):
+
+Skonfiguruj ekstraktor cech tak, aby analizował przepływy z ostatnich X sekund, ale aktualizował wynik co Y sekund (np. okno 2-sekundowe, przesuwane co 1 sekundę).
+
+Pamięć Stanu (Histereza):
+
+Dodaj logikę zapobiegającą "migotaniu" alarmów. Blokada następuje dopiero, gdy model wykaże złośliwy ruch np. przez 3 kolejne okna przesuwne.
+
+Aktywna Mitygacja (Feedback Loop - IPS):
+
+Jeśli histereza potwierdzi atak, skrypt wykonuje wywołanie systemowe (np. os.system('iptables -A INPUT -s [IP_ATAKUJACEGO] -j DROP')), odcinając ruch na poziomie firewalla i odciążając procesor.
+
+FAZA 3: Przeprowadzenie Eksperymentów (Część Badawcza)
+To najważniejszy etap z perspektywy oceny na studiach. Mając gotowy system, przeprowadzasz na nim kontrolowane testy. Uruchamiasz swój system, a z innej maszyny wirtualnej generujesz atak DDoS (np. narzędziem hping3).
+
+Badasz i notujesz trzy kluczowe aspekty:
+
+Eksperyment 1: Analiza Okna Czasowego i Pamięci Stanu.
+
+Co mierzysz: Jak system zachowuje się przy oknach 0.5s, 1s i 3s.
+
+Cel: Udowodnienie, że zbyt małe okno bez pamięci stanu gubi atak (flapping), a okno przesuwne rozwiązuje ten problem.
+
+Eksperyment 2: Analiza Opóźnień (Latency Bottleneck).
+
+Co mierzysz: Dokładny czas (w milisekundach) spędzony w module Sniffera, Ekstraktora i Modelu ML.
+
+Cel: Udowodnienie, że faza predykcji ML to ułamek czasu, a najwięcej zasobów pochłania ekstrakcja cech. Porównanie opóźnień "lekkiego" modelu z siecią neuronową w działaniu online.
+
+Eksperyment 3: Skuteczność Pętli Zwrotnej IPS (Zużycie CPU).
+
+Co mierzysz: Obciążenie procesora Twojego komputera/serwera w czasie ataku.
+
+Cel: Pokazanie na wykresie, że bez reguł iptables zużycie CPU dąży do 100%, a dzięki aktywnej mitygacji (IPS) system błyskawicznie wraca do normy, odrzucając ataki przed wejściem do Pythona.
+
+FAZA 4: Opracowanie wyników i publikacja (Artykuł)
+Zgodnie z plikiem instrukcji SPZC-projekt.pdf, musisz opisać swoje dzieło w formie artykułu naukowego.
+
+Narzędzie: Zaloguj się na Overleaf (narzędzie chmurowe do LaTeX).
+
+Szablon: Załaduj wymagany szablon "IEEE Conference Template" (link masz w pliku PDF z instrukcją).
+
+Struktura Artykułu:
+
+Abstract: Krótkie podsumowanie – zrobiliśmy system IPS w czasie rzeczywistym, rozwiązaliśmy problem opóźnień i migotania alarmów.
+
+Introduction: Wstęp do problemu ataków DDoS i wyzwań związanych z detekcją w czasie rzeczywistym.
+
+Related Work: Krótki przegląd dostarczonych artykułów (surveys), pokazujący, że ML świetnie wykrywa ataki offline, ale rzadko bada się jego wydajność online.
+
+Methodology / System Architecture: Opis Twojej architektury (Okna przesuwne, Producent-Konsument, IPS).
+
+Performance Evaluation (Wyniki): Najważniejsza sekcja! Wykresy i tabele z fazy 3 (zużycie CPU, opóźnienia, wpływ rozmiaru okna).
+
+Conclusion: Wnioski z badań.
+
+
+Próbkowanie warstwowe (Stratified Sampling).
+
+Dzięki takiemu podejściu Twój mały zbiór danych zachowa dokładnie taką samą "naturę" (proporcje) jak oryginalny, gigantyczny plik. Jeśli w rzeczywistości atak DDoS stanowił 95% ruchu, a normalny ruch 5%, Twój 10-tysięczny plik będzie miał 9500 wierszy ataku i 500 wierszy ruchu normalnego. To gwarantuje, że model nauczy się realistycznych warunków sieciowych!
+
+To jest tak dobra praktyka, że koniecznie musisz o niej wspomnieć w swoim artykule na zaliczenie w sekcji "Metodyka" (Data Preprocessing).
+
+
+To bardzo pragmatyczne podejście! Wymuszenie minimalnej liczby próbek dla mniejszościowej klasy (w naszym przypadku ruchu normalnego BENIGN) to znana technika radzenia sobie ze zjawiskiem zwanym Class Imbalance (Niezbalansowanie Klas).
+
+
+Przetwarzanie pliku: DrDoS_DNS.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 500, Atak: 9500).
+Przetwarzanie pliku: DrDoS_LDAP.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 312, Atak: 9688).
+Przetwarzanie pliku: DrDoS_MSSQL.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 500, Atak: 9500).
+Przetwarzanie pliku: DrDoS_NetBIOS.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 500, Atak: 9500).
+Przetwarzanie pliku: DrDoS_NTP.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 500, Atak: 9500).
+Przetwarzanie pliku: DrDoS_SNMP.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 500, Atak: 9500).
+Przetwarzanie pliku: DrDoS_SSDP.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 133, Atak: 9867).
+Przetwarzanie pliku: DrDoS_UDP.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 500, Atak: 9500).
+Przetwarzanie pliku: Syn.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 162, Atak: 9838).
+Przetwarzanie pliku: TFTP.csv...
+ -> Sukces! Zapisano 10000 wierszy (Ruch normalny: 500, Atak: 9500).
+Przetwarzanie pliku: UDPLag.csv...
+
+
+mamy do czynienia ze zniezbalansowanym układem : F1-Score: Średnia harmoniczna z Precyzji i Czułości. To najważniejsza metryka, gdy klasy są niezbalansowane.
+
+
+
+============================================================
+--- Analiza pliku: DrDoS_DNS.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: DrDoS_LDAP.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: DrDoS_MSSQL.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: DrDoS_NetBIOS.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: DrDoS_NTP.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: DrDoS_SNMP.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: DrDoS_SSDP.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: DrDoS_UDP.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: Syn.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: TFTP.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+============================================================
+--- Analiza pliku: UDPLag.csv ---
+ -> Trenowanie: Decision Tree...
+ -> Trenowanie: Random Forest...
+ -> Trenowanie: Neural Network...
+
+================================================================================
+*** ZBIORCZE PODSUMOWANIE WYNIKÓW (GOTOWE DO ARTYKUŁU) ***
+================================================================================
+                                  Accuracy  Precision  Recall  F1-Score
+Plik (Atak)       Model
+DrDoS_DNS.csv     Decision Tree     0.9985     1.0000  0.9984    0.9992
+                  Random Forest     0.9980     1.0000  0.9979    0.9989
+                  Neural Network    0.9975     1.0000  0.9974    0.9987
+DrDoS_LDAP.csv    Decision Tree     0.9995     1.0000  0.9995    0.9997
+                  Random Forest     0.9995     1.0000  0.9995    0.9997
+                  Neural Network    0.9985     0.9990  0.9995    0.9992
+DrDoS_MSSQL.csv   Decision Tree     0.9995     1.0000  0.9995    0.9997
+                  Random Forest     0.9995     1.0000  0.9995    0.9997
+                  Neural Network    1.0000     1.0000  1.0000    1.0000
+DrDoS_NetBIOS.csv Decision Tree     0.9990     1.0000  0.9989    0.9995
+                  Random Forest     0.9985     1.0000  0.9984    0.9992
+                  Neural Network    0.9990     1.0000  0.9989    0.9995
+DrDoS_NTP.csv     Decision Tree     0.9985     0.9989  0.9995    0.9992
+                  Random Forest     0.9985     0.9995  0.9989    0.9992
+                  Neural Network    0.9970     0.9984  0.9984    0.9984
+DrDoS_SNMP.csv    Decision Tree     0.9995     0.9995  1.0000    0.9997
+                  Random Forest     0.9995     1.0000  0.9995    0.9997
+                  Neural Network    0.9995     1.0000  0.9995    0.9997
+DrDoS_SSDP.csv    Decision Tree     0.9990     0.9995  0.9995    0.9995
+                  Random Forest     0.9995     1.0000  0.9995    0.9997
+                  Neural Network    0.9995     1.0000  0.9995    0.9997
+DrDoS_UDP.csv     Decision Tree     0.9975     0.9989  0.9984    0.9987
+                  Random Forest     0.9980     1.0000  0.9979    0.9989
+                  Neural Network    0.9970     1.0000  0.9968    0.9984
+Syn.csv           Decision Tree     0.9990     0.9995  0.9995    0.9995
+                  Random Forest     0.9990     0.9995  0.9995    0.9995
+                  Neural Network    0.9990     0.9995  0.9995    0.9995
+TFTP.csv          Decision Tree     1.0000     1.0000  1.0000    1.0000
+                  Random Forest     1.0000     1.0000  1.0000    1.0000
+                  Neural Network    1.0000     1.0000  1.0000    1.0000
+UDPLag.csv        Decision Tree     0.9990     0.9989  1.0000    0.9995
+                  Random Forest     1.0000     1.0000  1.0000    1.0000
+                  Neural Network    0.9985     0.9984  1.0000    0.9992
+
+
+
+
+======================================================================
+*** WYNIKI TESTÓW DLA CAŁEGO PLIKU (DrDoS_DNS.csv) ***
+======================================================================
+                   Model  Accuracy  Precision  Recall  F1-Score
+SGD Classifier (Liniowy)    0.9998     1.0000  0.9998    0.9999
+    Neural Network (MLP)    0.9999     0.9999  0.9999    0.9999
+           Random Forest    0.9998     0.9998  1.0000    0.9999

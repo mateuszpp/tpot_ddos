@@ -1,0 +1,22 @@
+def run_tpot_optimization(X_train, y_train, X_test, y_test, generations=5, population_size=10):
+    print("\n--- Rozpoczęcie optymalizacji genetycznej TPOT ---")
+    
+    custom_tpot_config = {
+        'sklearn.ensemble.RandomForestClassifier': {'n_estimators': [50, 100], 'max_depth': [None, 10]},
+        'xgboost.XGBClassifier': {'n_estimators': [50, 100], 'learning_rate': [0.1, 0.5], 'max_depth': [3, 5]}
+    }
+
+    tpot = TPOTClassifier(
+        generations=generations,
+        population_size=population_size,
+        cv=3, 
+        config_dict=custom_tpot_config, 
+        max_eval_time_mins=2, 
+        verbosity=2, 
+        random_state=42
+    )
+    
+
+
+    
+    NTP DNS i LDAP

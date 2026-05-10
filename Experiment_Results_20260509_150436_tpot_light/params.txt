@@ -1,0 +1,14 @@
+TPOT light 
+
+    tpot = TPOTClassifier(
+        generations=generations,
+        population_size=population_size,
+        cv=3, 
+        config_dict="TPOT light", 
+        max_eval_time_mins=1, 
+        verbosity=2, 
+        random_state=42
+    )
+
+
+NTP I LDAP tylko ! 

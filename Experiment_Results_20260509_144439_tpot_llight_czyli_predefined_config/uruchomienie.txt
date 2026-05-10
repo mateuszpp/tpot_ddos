@@ -1,0 +1,55 @@
+pping import of NN models.
+  warnings.warn("Warning: optional dependency `torch` is not available. - skipping import of NN models.")
+Wyniki będą zapisywane w katalogu: Experiment_Results_20260509_144439
+
+[INFO] Plik DrDoS_NTP ma rozmiar 0.60 GB (< 1GB). Ustawiono próbkowanie: 10.0%
+Ładowanie danych z: ../DrDoS_NTP.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_NTP
+==================================================
+Dane w tym przebiegu: Trening=96796, Test=24200
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 0.9999, Czas: 17.37s
+XGBoost Baseline - Accuracy: 1.0000, Czas: 1.19s
+
+--- Ewaluacja modelu: DrDoS_NTP_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: DrDoS_NTP_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                                                               
+Generation 1 - Current best internal CV score: 0.9997003996689319
+                                                                                                                                                                               
+Generation 2 - Current best internal CV score: 0.9997003996689319
+                                                                                                                                                                               
+Generation 3 - Current best internal CV score: 0.9997003996689319
+                                                                                                                                                                               
+Generation 4 - Current best internal CV score: 0.9997623866619828
+                                                                                                                                                                               
+Generation 5 - Current best internal CV score: 0.9997623866619828
+                                                          
+Best pipeline: DecisionTreeClassifier(DecisionTreeClassifier(MaxAbsScaler(input_matrix), criterion=entropy, max_depth=7, min_samples_leaf=12, min_samples_split=16), criterion=gini, max_depth=2, min_samples_leaf=4, min_samples_split=7)
+TPOT Accuracy: 1.0000, Czas: 819.39s
+
+--- Ewaluacja modelu: DrDoS_NTP_TPOT_Optimized ---
+Błąd podczas przetwarzania pliku ../DrDoS_NTP.csv: [Errno 2] No such file or directory: 'Experiment_Results_20260509_144439\\confusion_matrix_DrDoS_NTP_TPOT_Optimized.png'
+
+[INFO] Plik DrDoS_LDAP ma rozmiar 0.85 GB (< 1GB). Ustawiono próbkowanie: 10.0%
+Ładowanie danych z: ../DrDoS_LDAP.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_LDAP
+==================================================
+Dane w tym przebiegu: Trening=171431, Test=42858
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 1.0000, Czas: 7.53s
+XGBoost Baseline - Accuracy: 0.9986, Czas: 1.78s
+
+--- Ewaluacja modelu: DrDoS_LDAP_Baseline_RandomForest ---
+Błąd podczas przetwarzania pliku ../DrDoS_LDAP.csv: [Errno 2] No such file or directory: 'Experiment_Results_20260509_144439\\confusion_matrix_DrDoS_LDAP_Baseline_RandomForest.png'

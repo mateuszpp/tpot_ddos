@@ -11,6 +11,32 @@ def setup_experiment_dir():
     os.makedirs(dir_name, exist_ok=True)
     return dir_name
 
+def print_model_params(baseline_results, tpot_model):
+    print("\n" + "="*50)
+    print(" PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT ")
+    print("="*50)
+    
+    # Wyciąganie Baseline XGBoost (szukamy go w liście wyników)
+    xgb_baseline = next((res['Model_Object'] for res in baseline_results if res['Algorithm'] == 'XGBoost'), None)
+
+    
+    if xgb_baseline:
+        print(f"\n[Baseline XGBoost] Domyślne parametry:")
+        params = xgb_baseline.get_params()
+        print(f" - max_depth: {params.get('max_depth')}")
+        print(f" - learning_rate: {params.get('learning_rate')}")
+        print(f" - n_estimators: {params.get('n_estimators')}")
+
+    # Wyciąganie parametrów z TPOT (z ostatniego kroku potoku)
+    # tpot_model to zwykle Pipeline, więc bierzemy ostatni element
+    tpot_params = tpot_model.steps[-1][1].get_params()
+    print(f"\n[TPOT Optimized] Parametry wybrane ewolucyjnie:")
+    print(f" - max_depth: {tpot_params.get('max_depth')}")
+    print(f" - learning_rate: {tpot_params.get('learning_rate')}")
+    print(f" - n_estimators: {tpot_params.get('n_estimators')}")
+    print("="*50 + "\n")
+
+
 def log_to_csv(csv_path, dataset_name, train_size, test_size, result_dict, precision, recall, f1):
     # Sprawdzamy czy plik istnieje, by wiedzieć czy dodać nagłówki
     file_exists = os.path.isfile(csv_path)
@@ -57,11 +83,13 @@ def run_pipeline_for_dataset(dataset_name, X_train, y_train, X_test, y_test, out
         log_to_csv(csv_path, dataset_name, train_sz, test_sz, res, p, r, f1)
 
     # 2. TPOT (z przyspieszonymi parametrami)
-    tpot_res = run_tpot_optimization(X_train, y_train, X_test, y_test, generations=3, population_size=5)
+    tpot_res = run_tpot_optimization(X_train, y_train, X_test, y_test, generations=5, population_size=10)
     plot_name = f"{dataset_name}_TPOT_Optimized"
     p, r, f1 = evaluate_and_plot(tpot_res['Model_Object'], X_test, y_test, plot_name, output_dir)
     # Przekazujemy rozmiary danych do zapisu
     log_to_csv(csv_path, dataset_name, train_sz, test_sz, tpot_res, p, r, f1)
+
+    print_model_params(baseline_results, tpot_res['Model_Object'])
 
 def main():
     # Konfiguracja środowiska
@@ -73,7 +101,7 @@ def main():
     files_to_process = [
         '../DrDoS_NTP.csv',
         '../DrDoS_LDAP.csv',
-        '../DrDoS_DNS.csv',
+        #'../DrDoS_DNS.csv',
         # '../DrDoS_SNMP.csv',
         # '../DrDoS_UDP.csv'
     ]
@@ -114,7 +142,7 @@ def main():
     # CZĘŚĆ 2: Eksperyment z Globalnym Zbiorem Danych
     try:
         # Pamiętaj, aby dobrać fraction_per_file tak, aby nie zapchać RAM-u przy łączeniu wielu plików!
-        X_train_g, X_test_g, y_train_g, y_test_g = create_global_dataset(files_to_process, fraction_per_file=0.01)
+        X_train_g, X_test_g, y_train_g, y_test_g = create_global_dataset(files_to_process, fraction_per_file=0.03)
         run_pipeline_for_dataset("Global_Combined_Dataset", X_train_g, y_train_g, X_test_g, y_test_g, output_dir, csv_path)
     except Exception as e:
         print(f"Błąd podczas tworzenia globalnego datasetu: {e}")
