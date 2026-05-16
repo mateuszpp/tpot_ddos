@@ -62,7 +62,7 @@ def run_tpot_optimization(X_train, y_train, X_test, y_test, generations=5, popul
         population_size=population_size,
         cv=3, 
         #config_dict="TPOT light", 
-        max_eval_time_mins=3, 
+        max_eval_time_mins=2, 
         verbosity=2, 
         random_state=42
     )

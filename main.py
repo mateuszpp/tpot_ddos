@@ -101,9 +101,9 @@ def main():
     files_to_process = [
         '../DrDoS_NTP.csv',
         '../DrDoS_LDAP.csv',
-        #'../DrDoS_DNS.csv',
-        # '../DrDoS_SNMP.csv',
-        # '../DrDoS_UDP.csv'
+        '../DrDoS_DNS.csv',
+        '../DrDoS_SNMP.csv',
+        '../DrDoS_UDP.csv'
     ]
 
     # --- KONFIGURACJA DYNAMICZNEGO PRÓBKOWANIA ---

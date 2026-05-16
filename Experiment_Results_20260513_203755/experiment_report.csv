@@ -1,0 +1,19 @@
+Dataset,Train_Size,Test_Size,Model_Type,Algorithm,Accuracy,Precision,Recall,F1_Score,Train_Time_sec,RAM_Usage_MB,CPU_Usage_percent
+DrDoS_NTP,96796,24200,Baseline,Random Forest,0.9999,0.9982,0.9982,0.9982,17.48,-0.33,11.4
+DrDoS_NTP,96796,24200,Baseline,XGBoost,1.0,1.0,0.9982,0.9991,1.38,4.55,27.9
+DrDoS_NTP,96796,24200,TPOT_Optimized,ExtraTreesClassifier,0.9998,0.9999,0.9895,0.9946,3076.25,-53.57,1.8
+DrDoS_LDAP,171431,42858,Baseline,Random Forest,1.0,1.0,1.0,1.0,8.47,0.68,21.1
+DrDoS_LDAP,171431,42858,Baseline,XGBoost,0.9986,0.4996,0.4996,0.4996,2.45,-2.93,34.7
+DrDoS_LDAP,171431,42858,TPOT_Optimized,ExtraTreesClassifier,1.0,1.0,1.0,1.0,1442.85,-248.89,6.6
+DrDoS_DNS,196480,49120,Baseline,Random Forest,1.0,1.0,1.0,1.0,18.31,8.7,3.1
+DrDoS_DNS,196480,49120,Baseline,XGBoost,0.9987,0.5414,0.5438,0.5425,2.1,48.02,24.8
+DrDoS_DNS,196480,49120,TPOT_Optimized,ExtraTreesClassifier,1.0,1.0,1.0,1.0,3107.14,-106.04,8.3
+DrDoS_SNMP,206029,51508,Baseline,Random Forest,1.0,1.0,1.0,1.0,12.6,6.98,6.6
+DrDoS_SNMP,206029,51508,Baseline,XGBoost,1.0,0.9412,1.0,0.9687,2.01,17.82,29.9
+DrDoS_SNMP,206029,51508,TPOT_Optimized,ExtraTreesClassifier,1.0,1.0,1.0,1.0,2770.84,-3.1,1.4
+DrDoS_UDP,123844,30962,Baseline,Random Forest,0.9999,0.9762,0.9762,0.9762,10.4,-15.46,4.5
+DrDoS_UDP,123844,30962,Baseline,XGBoost,0.9999,1.0,0.9524,0.975,0.95,40.04,21.4
+DrDoS_UDP,123844,30962,TPOT_Optimized,ExtraTreesClassifier,1.0,0.9773,1.0,0.9884,1338.33,-124.2,14.8
+Global_Combined_Dataset,396280,99071,Baseline,Random Forest,0.9999,0.9884,0.981,0.9847,57.74,1.64,16.5
+Global_Combined_Dataset,396280,99071,Baseline,XGBoost,0.9993,0.8758,0.8673,0.8715,4.07,60.16,32.0
+Global_Combined_Dataset,396280,99071,TPOT_Optimized,ExtraTreesClassifier,1.0,0.9925,0.9962,0.9943,5709.53,-213.86,13.3

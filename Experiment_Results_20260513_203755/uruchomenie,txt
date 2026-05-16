@@ -1,0 +1,340 @@
+ency `torch` is not available. - skipping import of NN models.
+  warnings.warn("Warning: optional dependency `torch` is not available. - skipping import of NN models.")
+Wyniki będą zapisywane w katalogu: Experiment_Results_20260513_203755
+
+[INFO] Plik DrDoS_NTP ma rozmiar 0.60 GB (< 1GB). Ustawiono próbkowanie: 10.0%
+Ładowanie danych z: ../DrDoS_NTP.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_NTP
+==================================================
+Dane w tym przebiegu: Trening=96796, Test=24200
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 0.9999, Czas: 17.48s
+XGBoost Baseline - Accuracy: 1.0000, Czas: 1.38s
+
+--- Ewaluacja modelu: DrDoS_NTP_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: DrDoS_NTP_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                           
+Generation 1 - Current best internal CV score: 0.9999173511028463
+                                                                                                                                           
+Generation 2 - Current best internal CV score: 0.9999173511028463
+                                                                                                                                           
+Generation 3 - Current best internal CV score: 0.9999173511028463
+                                                                                                                                           
+Generation 4 - Current best internal CV score: 0.9999173511028463
+                                                                                                                                           
+Generation 5 - Current best internal CV score: 0.9999173511028463
+                                                          
+Best pipeline: ExtraTreesClassifier(LogisticRegression(input_matrix, C=0.1, dual=False, penalty=l2), bootstrap=True, criterion=entropy, max_features=0.8, min_samples_leaf=19, min_samples_split=5, n_estimators=100)
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+TPOT Accuracy: 0.9998, Czas: 3076.25s
+
+--- Ewaluacja modelu: DrDoS_NTP_TPOT_Optimized ---
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
+  warnings.warn(
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+[INFO] Plik DrDoS_LDAP ma rozmiar 0.85 GB (< 1GB). Ustawiono próbkowanie: 10.0%
+Ładowanie danych z: ../DrDoS_LDAP.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_LDAP
+==================================================
+Dane w tym przebiegu: Trening=171431, Test=42858
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 1.0000, Czas: 8.47s
+XGBoost Baseline - Accuracy: 0.9986, Czas: 2.45s
+
+--- Ewaluacja modelu: DrDoS_LDAP_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: DrDoS_LDAP_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                           
+Generation 1 - Current best internal CV score: 0.9998775016333027
+                                                                                                                                           
+Generation 2 - Current best internal CV score: 0.9998775016333027
+                                                                                                                                           
+Generation 3 - Current best internal CV score: 0.9998891684749648
+                                                                                                                                           
+Generation 4 - Current best internal CV score: 0.9999533338583237
+                                                                                                                                           
+Generation 5 - Current best internal CV score: 0.9999533338583237
+                                                          
+Best pipeline: ExtraTreesClassifier(input_matrix, bootstrap=False, criterion=entropy, max_features=0.35000000000000003, min_samples_leaf=1, min_samples_split=9, n_estimators=100)
+TPOT Accuracy: 1.0000, Czas: 1442.85s
+
+--- Ewaluacja modelu: DrDoS_LDAP_TPOT_Optimized ---
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+[INFO] Plik DrDoS_DNS ma rozmiar 1.99 GB (>= 1GB). Ustawiono próbkowanie: 5.0%
+Ładowanie danych z: ../DrDoS_DNS.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_DNS
+==================================================
+Dane w tym przebiegu: Trening=196480, Test=49120
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 1.0000, Czas: 18.31s
+XGBoost Baseline - Accuracy: 0.9987, Czas: 2.10s
+
+--- Ewaluacja modelu: DrDoS_DNS_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: DrDoS_DNS_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                           
+Generation 1 - Current best internal CV score: 0.9998524020728934
+                                                                                                                                           
+Generation 2 - Current best internal CV score: 0.9998982083395318
+                                                                                                                                           
+Generation 3 - Current best internal CV score: 0.9999847313480684
+                                                                                                                                           
+Generation 4 - Current best internal CV score: 0.9999898209505197
+                                                                                                                                           
+Generation 5 - Current best internal CV score: 0.9999898209505197
+                                                          
+Best pipeline: ExtraTreesClassifier(ExtraTreesClassifier(GaussianNB(input_matrix), bootstrap=True, criterion=gini, max_features=0.55, min_samples_leaf=3, min_samples_split=18, n_estimators=100), bootstrap=False, criterion=gini, max_features=0.35000000000000003, min_samples_leaf=18, min_samples_split=9, n_estimators=100)
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but GaussianNB was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but GaussianNB was fitted with feature names
+  warnings.warn(
+TPOT Accuracy: 1.0000, Czas: 3107.14s
+
+--- Ewaluacja modelu: DrDoS_DNS_TPOT_Optimized ---
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but GaussianNB was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but GaussianNB was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but GaussianNB was fitted with feature names
+  warnings.warn(
+C:\Users\matip\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but GaussianNB was fitted with feature names
+  warnings.warn(
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+[INFO] Plik DrDoS_SNMP ma rozmiar 2.02 GB (>= 1GB). Ustawiono próbkowanie: 5.0%
+Ładowanie danych z: ../DrDoS_SNMP.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_SNMP
+==================================================
+Dane w tym przebiegu: Trening=206029, Test=51508
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 1.0000, Czas: 12.60s
+XGBoost Baseline - Accuracy: 1.0000, Czas: 2.01s
+
+--- Ewaluacja modelu: DrDoS_SNMP_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: DrDoS_SNMP_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                           
+Generation 1 - Current best internal CV score: 0.9999417557015685
+                                                                                                                                           
+Generation 2 - Current best internal CV score: 0.9999417557015685
+                                                                                                                                           
+Generation 3 - Current best internal CV score: 0.9999417557015685
+                                                                                                                                           
+Generation 4 - Current best internal CV score: 0.9999563166171588
+                                                                                                                                           
+Generation 5 - Current best internal CV score: 0.9999611703263634
+                                                          
+Best pipeline: ExtraTreesClassifier(StandardScaler(input_matrix), bootstrap=True, criterion=entropy, max_features=0.8500000000000001, min_samples_leaf=4, min_samples_split=7, n_estimators=100)
+TPOT Accuracy: 1.0000, Czas: 2770.84s
+
+--- Ewaluacja modelu: DrDoS_SNMP_TPOT_Optimized ---
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+[INFO] Plik DrDoS_UDP ma rozmiar 1.40 GB (>= 1GB). Ustawiono próbkowanie: 5.0%
+Ładowanie danych z: ../DrDoS_UDP.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: DrDoS_UDP
+==================================================
+Dane w tym przebiegu: Trening=123844, Test=30962
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 0.9999, Czas: 10.40s
+XGBoost Baseline - Accuracy: 0.9999, Czas: 0.95s
+
+--- Ewaluacja modelu: DrDoS_UDP_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: DrDoS_UDP_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                           
+Generation 1 - Current best internal CV score: 0.999814282745191
+                                                                                                                                           
+Generation 2 - Current best internal CV score: 0.999967701040834
+                                                                                                                                           
+Generation 3 - Current best internal CV score: 0.999967701040834
+                                                                                                                                           
+Generation 4 - Current best internal CV score: 0.999967701040834
+                                                                                                                                           
+Generation 5 - Current best internal CV score: 0.999967701040834
+                                                          
+Best pipeline: ExtraTreesClassifier(input_matrix, bootstrap=False, criterion=entropy, max_features=0.35000000000000003, min_samples_leaf=1, min_samples_split=9, n_estimators=100)
+TPOT Accuracy: 1.0000, Czas: 1338.33s
+
+--- Ewaluacja modelu: DrDoS_UDP_TPOT_Optimized ---
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+--- Tworzenie Globalnego Zbioru (Combined Dataset) ---
+Pobieranie próbek z ../DrDoS_NTP.csv...
+Pobieranie próbek z ../DrDoS_LDAP.csv...
+Pobieranie próbek z ../DrDoS_DNS.csv...
+Pobieranie próbek z ../DrDoS_SNMP.csv...
+Pobieranie próbek z ../DrDoS_UDP.csv...
+Ładowanie danych z: temp_global_dataset.csv...
+Mapowanie klas: 0 -> Ruch normalny (BENIGN), 1 -> Atak (DDoS)
+
+==================================================
+ROZPOCZĘCIE ANALIZY DLA: Global_Combined_Dataset
+==================================================
+Dane w tym przebiegu: Trening=396280, Test=99071
+
+--- Trenowanie modeli bazowych (Baseline) ---
+Random Forest Baseline - Accuracy: 0.9999, Czas: 57.74s
+XGBoost Baseline - Accuracy: 0.9993, Czas: 4.07s
+
+--- Ewaluacja modelu: Global_Combined_Dataset_Baseline_RandomForest ---
+
+--- Ewaluacja modelu: Global_Combined_Dataset_Baseline_XGBoost ---
+
+--- Rozpoczęcie optymalizacji genetycznej TPOT ---
+Version 0.12.1 of tpot is outdated. Version 1.1.0 was released Thursday July 03, 2025.
+                                                                                                                                           
+Generation 1 - Current best internal CV score: 0.9999798122221222
+                                                                                                                                           
+Generation 2 - Current best internal CV score: 0.9999798122221222
+                                                                                                                                           
+Generation 3 - Current best internal CV score: 0.9999798122221222
+                                                                                                                                           
+Generation 4 - Current best internal CV score: 0.9999798122221222
+                                                            
+Generation 5 - Current best internal CV score: 0.9999798122221222
+                                                            
+Best pipeline: ExtraTreesClassifier(input_matrix, bootstrap=True, criterion=entropy, max_features=0.8, min_samples_leaf=19, min_samples_split=5, n_estimators=100)
+TPOT Accuracy: 1.0000, Czas: 5709.53s
+
+--- Ewaluacja modelu: Global_Combined_Dataset_TPOT_Optimized ---
+
+==================================================
+ PORÓWNANIE PARAMETRÓW: BASELINE vs TPOT 
+==================================================
+
+[Baseline XGBoost] Domyślne parametry:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: None
+
+[TPOT Optimized] Parametry wybrane ewolucyjnie:
+ - max_depth: None
+ - learning_rate: None
+ - n_estimators: 100
+==================================================
+
+
+WSZYSTKIE EKSPERYMENTY ZAKOŃCZONE POMYŚLNIE. Sprawdź katalog: Experiment_Results_20260513_203755
