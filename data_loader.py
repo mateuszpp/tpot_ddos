@@ -8,7 +8,6 @@ def load_and_preprocess_data(file_path, sample_fraction=0.1, random_state=42):
     df = pd.read_csv(file_path, low_memory=False)
     df.columns = df.columns.str.strip()
     
-    # Krok 1: Wymuszenie binarnej klasyfikacji. 
     # Wszystko co jest 'BENIGN' staje się 0. Wszystko inne (DDoS) staje się 1.
     y_raw = df['Label']
     y = y_raw.apply(lambda x: 0 if x.strip().upper() == 'BENIGN' else 1)
@@ -41,11 +40,11 @@ def create_global_dataset(file_paths, fraction_per_file=0.02):
     for path in file_paths:
         print(f"Pobieranie próbek z {path}...")
         df = pd.read_csv(path, low_memory=False)
-        # Pobieramy tylko mały ułamek, żeby globalny zbiór był rozsądnych rozmiarów
+        # Pobieramy tylko mały ułamek
         df_sampled = df.sample(frac=fraction_per_file, random_state=42)
         combined_df = pd.concat([combined_df, df_sampled], ignore_index=True)
     
-    # Zapisujemy połączony zbiór do tymczasowego pliku, żeby użyć standardowego loadera
+    # Zapisujemy połączony zbiór do tymczasowego pliku
     temp_path = "temp_global_dataset.csv"
     combined_df.to_csv(temp_path, index=False)
     
